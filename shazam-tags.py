@@ -1,6 +1,9 @@
+# List saved tags from Shazam macOS app
+
+import os
 import sqlite3
 
-db_path = '/Users/snap/Library/Containers/com.shazam.mac.Shazam/Data/Documents/ShazamDataModel.sqlite'
+db_path = os.path.expanduser('~/Library/Containers/com.shazam.mac.Shazam/Data/Documents/ShazamDataModel.sqlite')
 
 connection = sqlite3.connect(db_path)
 cursor = connection.cursor()
