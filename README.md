@@ -1,9 +1,11 @@
 # Shazam tags
 
 This Python script lists your saved tags from the Shazam macOS app.
-Shazam for macOS doesn't have an option to save your tags, but stores its data in a SQLite database located in:
+Shazam for macOS doesn't have an option to save your tags, but stores its data in a SQLite database
+located in one of these places:
 ```
 ~/Library/Containers/com.shazam.mac.Shazam/Data/Documents/ShazamDataModel.sqlite
+~/Library/Group Containers/*.group.com.shazam/com.shazam.mac.Shazam/ShazamDataModel.sqlite
 ```
 
 ### Usage
