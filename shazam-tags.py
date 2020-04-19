@@ -21,6 +21,7 @@ if not db_path:
     raise UserWarning("Could not find Shazam Database")
 
 connection = sqlite3.connect(db_path)
+connection.text_factory = lambda x: x
 cursor = connection.cursor()
 results = cursor.execute(
     '''
@@ -32,6 +33,6 @@ results = cursor.execute(
 )
 
 for result in results:
-    print '{0} - {1}'.format(result[0], result[1])
+    print b'{0} - {1}'.format(result[0], result[1])
 
 connection.close()
