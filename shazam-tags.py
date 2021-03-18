@@ -4,6 +4,11 @@ import os
 import sqlite3
 
 
+# Field Delimiter
+delimiter = ' - '   # Default
+# delimiter = ','     # CSV
+
+
 db_path = os.path.expanduser(
     '~/Library/Containers/com.shazam.mac.Shazam/Data/Documents/ShazamDataModel.sqlite'
 )
@@ -25,14 +30,17 @@ connection.text_factory = lambda x: x
 cursor = connection.cursor()
 results = cursor.execute(
     '''
-    SELECT artist.ZNAME, tag.ZTRACKNAME
+    SELECT tag.Z_PK as Id, strftime('%Y-%m-%d', datetime(tag.ZDATE + 946684800 + 31536000, 'unixepoch')) as TagTime, tag.ZTRACKNAME as Title, artist.ZNAME as Artist, tag.ZSHAZAMSERVERTRACKURL as URL, tag.ZPRIVATETRACKKEY as TrackKey
     FROM ZSHARTISTMO artist, ZSHTAGRESULTMO tag
     WHERE artist.ZTAGRESULT = tag.Z_PK
     ORDER BY tag.ZDATE
     '''
 )
 
-for result in results:
-    print b'{0} - {1}'.format(result[0], result[1])
+names = [description[0] for description in cursor.description]
+print delimiter.join(names)
+
+for row in results:
+    print delimiter.join(str(field) for field in row)
 
 connection.close()
