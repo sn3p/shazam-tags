@@ -6,6 +6,9 @@ import sqlite3
 
 # Field Delimiter
 delimiter = ' - '   # Default
+# delimiter = ','     # CSV
+
+
 db_path = os.path.expanduser(
     '~/Library/Containers/com.shazam.mac.Shazam/Data/Documents/ShazamDataModel.sqlite'
 )
